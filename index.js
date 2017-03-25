@@ -14,10 +14,6 @@ module.exports = () =>
   exec('xrandr').then(parseXrandr)
   .then((devices) => Object.entries(devices).map(([k, v]) => new Display(k, v)));
 
-function xexec(display, prop, rest) {
-  return exec(`xrandr --output ${display} --${prop} ${rest}`).then(() => true);
-}
-
 class Display {
   constructor(name, data) {
     this.name = name;
@@ -34,22 +30,26 @@ class Display {
       y = x;
       z = x;
     }
-    return xexec(this.name, 'gamma', `${x}:${y}:${z}`);
+    return this._exec('gamma', `${x}:${y}:${z}`);
   }
 
   setBrightness(brightness) {
-    return xexec(this.name, 'brightness', brightness);
+    return this._exec('brightness', brightness);
   }
 
   setRotation(rotation) {
-    return xexec(this.name, 'rotate', rotation);
+    return this._exec('rotate', rotation);
   }
 
   setProperty(prop, value) {
-    return xexec(this.name, 'set', `${prop} ${value}`);
+    return this._exec('set', `${prop} ${value}`);
   }
 
   setRate(rate) {
-    return xexec(this.name, 'rate', rate);
+    return this._exec('rate', rate);
+  }
+
+  _exec(prop, rest) {
+    return exec(`xrandr --output ${this.name} --${prop} ${rest}`).then(() => true);
   }
 }

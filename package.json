@@ -1,0 +1,19 @@
+{
+  "name": "xrandr",
+  "version": "1.0.0",
+  "description": "cool xrandr abstractions for node",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guscaplan/node-xrandr.git"
+  },
+  "author": "Gus Caplan <me@gus.host>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/guscaplan/node-xrandr/issues"
+  },
+  "homepage": "https://github.com/guscaplan/node-xrandr#readme"
+}
